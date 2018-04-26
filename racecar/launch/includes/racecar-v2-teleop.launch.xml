@@ -3,6 +3,7 @@
   <arg name="racecar_version" default="racecar-v2" />
   <arg name="imu_model" default="razor_imu_m0" />  
   <arg name="run_camera" default="false"/>
+  <arg name="mux_config_file" default="$(find racecar)/config/$(arg racecar_version)/mux.yaml"/>
 
   <!-- joystick to ackermann command -->
   <include file="$(find racecar)/launch/includes/common/joy_teleop.launch.xml" >
@@ -15,7 +16,8 @@
   <!-- priority-based command multiplexer -->
   <include file="$(find ackermann_cmd_mux)/launch/standalone.launch">
     <arg name="nodelet_manager_name" value="ackermann_cmd_mux_nodelet_manager" />
-    <arg name="config_file" value="$(find racecar)/config/$(arg racecar_version)/mux.yaml" />
+    <arg name="config_file" value="$(arg mux_config_file)" />
+
   </include>
 
   <!-- controllers -->
